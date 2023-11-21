@@ -9,25 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Ex05Operation
- */
+
 @WebServlet("/Ex05Operation")
 public class Ex05Operation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public Ex05Operation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -64,7 +56,9 @@ public class Ex05Operation extends HttpServlet {
 		} catch (ArithmeticException e) {
 			e.printStackTrace();
 			out.print("0으로 나눌 수 없습니다.");
-		}
+		}//try-catch
+		
+		out.close();
 
 	}
 

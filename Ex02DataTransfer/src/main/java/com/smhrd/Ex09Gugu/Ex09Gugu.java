@@ -9,24 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Ex09Gugu
- */
+
 @WebServlet("/Ex09Gugu")
 public class Ex09Gugu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public Ex09Gugu() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int num1 = Integer.parseInt(request.getParameter("num1"));
@@ -35,20 +28,27 @@ public class Ex09Gugu extends HttpServlet {
 		String bgColor = request.getParameter("color");
 		
 		PrintWriter out = response.getWriter();
-		out.print("<html><body bgcolor="+bgColor+"></body></html>");
-
+		
 		int result;
+
+
+	        // HTML 테이블 시작
+	        out.println("<table bgcolor=" + bgColor +" style='border-style: inset;'>");
+			
+			out.println("<tr>");
 		
 		for(int i=num1; i<=num2 ; i++) {
 			for(int j=1; j<=9; j++) {
 				result = num1 * j;
+				out.print("<td style='border-style: inset;'>");
 				out.printf("%d*%d=%d\t", num1, j, result);
-			}
+				out.print("</td>");
+				
+			}//for
 			num1++;
-			out.print("<br>");
+			out.println("</tr>");
 		}//for
-		
-		
+		out.close();
 	}
 
 }

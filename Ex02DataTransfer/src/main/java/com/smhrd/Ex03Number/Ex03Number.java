@@ -18,12 +18,14 @@ public class Ex03Number extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
+		
+		response.setContentType("text/html; charset=UTF-8"); // 위치 중요
+		// response.setCharacterEncoding("utf-8");
 		
 		int num = Integer.parseInt(request.getParameter("number"));
 		PrintWriter out = response.getWriter();
 		out.printf("입력한 숫자는 %d입니다.", num);
-		
+		out.close();
 	}
 
 }
