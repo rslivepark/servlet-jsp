@@ -24,8 +24,8 @@ public class Ex09Gugu extends HttpServlet {
 	
 		int num1 = Integer.parseInt(request.getParameter("num1"));
 		int num2 = Integer.parseInt(request.getParameter("num2"));
-		
 		String bgColor = request.getParameter("color");
+		
 		
 		PrintWriter out = response.getWriter();
 		
@@ -48,6 +48,7 @@ public class Ex09Gugu extends HttpServlet {
 			num1++;
 			out.println("</tr>");
 		}//for
+		out.println("</table>");
 		out.close();
 	}
 

@@ -28,6 +28,7 @@ public class Ex05Operation extends HttpServlet {
 		int num1 = Integer.parseInt(request.getParameter("num1"));
 		int num2 = Integer.parseInt(request.getParameter("num2"));
 		int result;
+		
 		PrintWriter out = response.getWriter();
 
 		String[] op = request.getParameterValues("operator");
