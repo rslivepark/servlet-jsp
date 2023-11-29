@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 1. 어떤 문법을 사용할것인지 정의해야함 : schema 
+schema? : xml 파일 안에서 정보(==태그)들의 집합 
+dtd? : document type definition >> mybatis의 config를 만들어줄 수 있는 것들을 정의하는 집합을 로드함 -->
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+  
+<!-- 2. configuration : mybatis 연결 설정을 정의하는 태그 -->
+<configuration>
+
+
+	<!-- 3. environments : 연결할 db들에 대한 정보들을 기술하는 태그 -->
+	<environments default="development">
+
+	
+		<!-- 4. environment : db """한 개"""에 대한 정보 -->
+		<environment id="development">
+
+		
+			<!-- 5. transactionManager : commit, rollback 누가 할 건지 정하는 공간
+				type
+				1) "JDBC" >> mybatis가 자체적으로 commit, rollback 결정하겠다는 뜻
+				2) "MANAGED" >> container에서 commit, rollback 결정
+			-->
+			<transactionManager type="JDBC" />
+
+			<!-- 6. dataSource ==  connection 객체 생성(할 때 많은 자원 사용)
+				>> property에 연결해야 하는 계정 정보 기술
+				dataSource type attribute
+				- POOLED : DBCP (DataBase Connection Pool)
+						   Connection 객체를 미리 생성하고 요청이 들어올 때마다 빌려주는 형식
+				- UNPOOLED : 요청이 들어올 때마다 Connection 객체를 생성하는 방식							
+			 -->	
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="service" />
+				<property name="password" value="12345" />
+			</dataSource>
+			
+		</environment>
+	</environments>
+
+	<!-- /////////////////////////////////////////////////////////////// -->
+
+	<!-- 7. mappers : mapper 태그를 여러개 넣을 수 있다. -->
+	<mappers>
+	
+		<!-- 8. mapper SQL 구문을 가지고 있는 파일의 경로를 잡아주는 태그 -->
+		<mapper resource="com/smhrd/db/MemberMapper.xml" />
+	</mappers>
+</configuration>
+

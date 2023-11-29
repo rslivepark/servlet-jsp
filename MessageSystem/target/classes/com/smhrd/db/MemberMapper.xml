@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 1. 문법정의(어떤 태그 사용할건지 정의) : mapper 태그 사용하겠다 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- mapper : 안쪽에 sql 구문을 작성할 수 있는 공간
+	 namespace는 중복이 되지 않게 선언!! DAO 이름을 일치시켜주는게 좋음
+-->
+<mapper namespace="com.smhrd.db.DAO">
+
+	<!-- 
+	1) id : sql 구문을 구별할 수 있는 중복되지 않는 식별자
+	2) parameterType : DAO에서 받아오는 매개변수의 자료형(full name 패키지 명까지)
+					>> java안에 있는 기본자료형이라면 안써도 됨
+	3) resultType : sql 구문을 실행하고 나서 반환하게 될 결과값의 자료형 (full name)
+					>> java안에 있는 기본자료형이라면 안써도 됨
+	 -->
+	
+	<insert id="join" parameterType="com.smhrd.model.MemberVO">
+	insert into web_member(email, pw, tel, address)
+	values (#{email}, #{pw}, #{tel}, #{address})
+	</insert>
+	
+	<select id="login" parameterType="com.smhrd.model.MemberVO" 
+					   resultType="com.smhrd.model.MemberVO" > 
+	select * from web_member
+	where email = #{email}
+	and pw = #{pw}
+	</select>
+
+	
+</mapper>
+
