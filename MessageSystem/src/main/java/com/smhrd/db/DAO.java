@@ -1,5 +1,7 @@
 package com.smhrd.db;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -29,8 +31,7 @@ public class DAO {
 		return row;
 	}
 
-	
-	
+
 	public MemberVO login(MemberVO vo) {
 		// 1. 연결객체 빌려오기
 		SqlSession sqlSession = factory.openSession(); // 커밋필요 없기 때문에 매개변수 필요ㄴㄴ
@@ -54,6 +55,55 @@ public class DAO {
 
 	}
 
+
+
+
+	
+	
+	public int update(MemberVO vo) {
+		
+		// 연결객체 빌려오기
+		SqlSession sqlsession = factory.openSession(true); // 오토커밋 할거야?? 응-> true, 아니-> false
+		
+		// 연결객체 사용하기
+		int row = sqlsession.update("update", vo);
+		
+		// 연결객체 반납하기
+		sqlsession.close();
+		
+		// 결과 반환하기
+		return row;
+	}
+
+
+	
+	
+	
+	public List<MemberVO> selectAll() {
+		
+		SqlSession sqlsession = factory.openSession(); 
+		
+		List<MemberVO> resultList = sqlsession.selectList("selectAll"); //mapper이름
+		
+		// 3. 연결객체 다시 반납하기
+		sqlsession.close();
+		
+		// 4. 결과값(row) 반환하기
+		return resultList;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //	public int login(MemberVO vo2) {
 //		SqlSession sqlsession = factory.openSession(true); // 쿠키와 세션 그거 아님 
 //		int row = sqlsession.selectOne("check", vo2);

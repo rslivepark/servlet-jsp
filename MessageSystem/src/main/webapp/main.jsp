@@ -18,7 +18,31 @@
 					<header id="header" class="alt">
 						<a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
 						<nav>
+							 <!-- 
+							 <c:if test="${member.email eq 'admin'}">
+								<a href="??">회원관리</a>
+								<a href="LogoutService">로그아웃</a>							
+							</c:if>
+							  -->
+									
+							<c:if test="${member == null }">
 								<a href="#menu">로그인</a>
+							</c:if>
+							
+							<c:if test="${member != null }"> 
+								
+								<c:if test="${member.email != 'admin' }"> 
+								<a href="update.jsp">개인정보 수정</a>
+								</c:if>
+								
+								<c:if test="${member.email == 'admin' }"> 
+								<a href="SelectAllService">회원관리</a>
+								</c:if>
+								
+								<a href="LogoutService">로그아웃</a> <!-- 서블릿 파일// 세션 모두 다 지워주는 방식 -->
+							</c:if>
+
+								
 							<!-- 로그인 후 Logout.jsp로 이동할 수 있는'로그아웃'링크와 '개인정보수정'링크를 출력하시오. -->
 						</nav>
 					</header>
@@ -181,7 +205,12 @@
 									<div class="contact-method">
 										<span class="icon alt fa-envelope"></span>
 										<h3>Email</h3>
-										<a href="#">로그인 한 사람의 이메일을 출력</a>
+										
+											<a href="#">${member.email} </a>
+											
+										
+												
+
 										<!-- 로그인 한 사용자의 이메일을 출력하시오 -->
 									</div>
 								</section>
@@ -189,7 +218,12 @@
 									<div class="contact-method">
 										<span class="icon alt fa-phone"></span>
 										<h3>Phone</h3>
-										<span>로그인 한 사람의 전화번호를 출력</span>
+										<span>
+										
+										<a href="#">${member.tel} </a>
+										
+										
+										</span>
 										<!-- 로그인 한 사용자의 전화번호를 출력하시오 -->
 									</div>
 								</section>
@@ -197,7 +231,9 @@
 									<div class="contact-method">
 										<span class="icon alt fa-home"></span>
 										<h3>Address</h3>
-										<span>로그인 한 사람의 집주소를 출력</span>
+										<span>
+										<a href="#">${member.address}</a>
+										</span>
 										<!-- 로그인 한 사용자의 집주소를 출력하시오 -->
 									</div>
 								</section>

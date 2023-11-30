@@ -11,6 +11,11 @@ dtd? : document type definition >> mybatis의 config를 만들어줄 수 있는 
 <!-- 2. configuration : mybatis 연결 설정을 정의하는 태그 -->
 <configuration>
 
+	<!-- mapper 파일에서 사용가능한 자료형의 별칭 부여하는 방법 -->
+	<typeAliases>
+		<!-- com.smhrd.model.MemberVO를 mapper 파일에서 mvo라고 부를거야 -->
+		<typeAlias type="com.smhrd.model.MemberVO" alias="mvo"/>
+	</typeAliases>
 
 	<!-- 3. environments : 연결할 db들에 대한 정보들을 기술하는 태그 -->
 	<environments default="development">

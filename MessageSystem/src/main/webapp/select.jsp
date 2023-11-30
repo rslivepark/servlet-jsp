@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 1.request영역에 저장된 정보를 가져오시오. -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,11 +21,22 @@
 					<nav id="Update">	
 						<table>
 							<caption><h2>회원관리페이지</h2></caption>
+							
 							<tr>
 								<td>Email</td>
 								<td>Tel</td>
-								<td>Address</td>							
+								<td>Address</td>
+														
 							</tr>
+							
+							<c:forEach items="${list}" var="mvo">
+								<tr>
+									<td>${mvo.email}</td>
+									<td>${mvo.tel}</td>
+									<td>${mvo.address}</td>
+								</tr>							
+							</c:forEach>
+							
 							<!-- 2.모든 회원의 이메일(email),전화번호(tel),주소(address)를 출력하시오. -->
 						</table>
 					</nav>		
