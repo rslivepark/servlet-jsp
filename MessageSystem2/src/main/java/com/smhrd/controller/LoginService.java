@@ -1,11 +1,8 @@
 package com.smhrd.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,20 +10,10 @@ import javax.servlet.http.HttpSession;
 import com.smhrd.db.DAO;
 import com.smhrd.model.MemberVO;
 
-@WebServlet("/LoginService")
-public class LoginService extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class LoginService implements Command  {
 
-	public LoginService() {
-		super();
-	}
-
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	public String execute (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-
-		// 1. 한글 인코딩 잡아주기
-		request.setCharacterEncoding("utf-8");
 
 		// 2. 요청 데이터 꺼내주기 (2개)
 		String email = request.getParameter("email");
@@ -49,12 +36,14 @@ public class LoginService extends HttpServlet {
 			
 			//세션에 
 			session.setAttribute("member", result);
-		} else {
 			
-		}
 
-		response.sendRedirect("main.jsp");
+		} 
 
+		// response.sendRedirect("main.jsp");
+		return "redirect:/Gomain.do";
+
+		
 	}
 
 }
