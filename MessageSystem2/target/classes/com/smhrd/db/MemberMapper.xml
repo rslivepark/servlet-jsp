@@ -17,6 +17,14 @@
 		insert into web_member(email, pw, tel, address)
 		values (#{email}, #{pw}, #{tel}, #{address})
 	</insert>
+	
+	<select id="emailCheck" parameterType="String" resultType="boolean">
+		select case when count(*) > 0 then 1
+					else 0
+				end result
+		from web_member
+		where email = #{email}
+	</select>
 
 	<select id="login" parameterType="com.smhrd.model.MemberVO"
 		resultType="com.smhrd.model.MemberVO">

@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>Forty by HTML5 UP</title>
+		<title>JSP & Servlet 실습예제 </title>
 		<meta charset="UTF-8" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -61,7 +61,9 @@
 							<li><h5>회원가입</h5></li>
 								<form action="Join.do" method="post">
 								<!-- name은 db table column 이름과 일치시킨다-->
-									<li><input name="email" type="text"  placeholder="Email을 입력하세요"></li>
+									<li><input name="email"  id = "inputE" type="text"  placeholder="Email을 입력하세요"></li>
+									<li><input type="button" id = "inputE" value="이메일 중복체크" onclick="checkE()"></li>
+									<li><span id="resultCheck"></span></li>
 									<li><input name="pw" type="password"  placeholder="PW를 입력하세요"></li>
 									<li><input name="tel" type="text"  placeholder="전화번호를 입력하세요"></li>
 									<li><input name="address" type="text"  placeholder="집주소를 입력하세요"></li>
@@ -167,8 +169,21 @@
 									</header>
 									<p></p>
 									<ul class="actions">
-										<li>로그인을 하세요.</li>
-										<li><a href="#" class="button next scrolly">전체삭제하기</a></li>
+										<!-- 로그인 이메일 출력하기 -->										
+										<c:choose>
+											<c:when test="${ member == null}">
+												<li>로그인을 하세요.</li>
+											</c:when>
+											<c:otherwise>
+												<li>${member.email}님에게 온 메세지</li>
+												<!--  전체메세지 삭제 -->
+												<li><a href="DelMessageAllService.do?email=${member.email}" class="button next scrolly">전체삭제하기</a></li>
+																												
+											</c:otherwise>
+											
+											
+											
+										</c:choose>
 									</ul>
 								</div>
 							</section>
@@ -267,6 +282,39 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			
+			
+			<script type="text/javascript">
+				function checkE() {
+					 var inputE = $("#inputE").val();					 
+					 console.log(inputE);
+					 
+					 $.ajax({
+						 // 어디로 요청할것인가?
+								 url : 'EmailCheckService.do',
+						// 요청할 데이터(json(key:value형태))
+						 data : {'inputE': inputE},
+						
+						//요청방식 (get, post)
+						type: 'get',
+						
+						// 요청이 성공할 경우 무엇을 할지?
+						success : function(data) {
+							if(data == 'true') {
+								$('#resultCheck').text('사용할 수 없는 아이디');
+							} else if(data == 'false') {
+								$('#resultCheck').text('사용할 수 있는 아이디');
+							}
+							
+						}, error : function() {
+							alert("통신실패");
+							
+						}//success - error
+						 
+					 }); //ajax
+					 
+				}			
+			</script>
 
 	</body>
 </html>
